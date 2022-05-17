@@ -1,0 +1,125 @@
+#pragma version 2
+global GroupSize
+int 1
+==
+bnz l6
+global GroupSize
+int 3
+==
+bnz l5
+global GroupSize
+int 4
+==
+bnz l4
+err
+l4:
+gtxn 0 TypeEnum
+int appl
+==
+gtxn 0 ApplicationID
+int 14973862
+==
+&&
+gtxn 1 TypeEnum
+int appl
+==
+&&
+gtxn 1 ApplicationID
+int 14973861
+==
+&&
+txn GroupIndex
+int 2
+==
+txn GroupIndex
+int 3
+==
+||
+&&
+txn TypeEnum
+int axfer
+==
+&&
+txn CloseRemainderTo
+global ZeroAddress
+==
+&&
+txn AssetCloseTo
+global ZeroAddress
+==
+&&
+b l7
+l5:
+gtxn 0 TypeEnum
+int appl
+==
+gtxn 0 ApplicationID
+int 14973862
+==
+&&
+gtxn 1 TypeEnum
+int appl
+==
+&&
+gtxn 1 ApplicationID
+int 14973861
+==
+&&
+txn GroupIndex
+int 2
+==
+&&
+txn TypeEnum
+int axfer
+==
+&&
+txn CloseRemainderTo
+global ZeroAddress
+==
+&&
+txn AssetCloseTo
+global ZeroAddress
+==
+&&
+b l7
+l6:
+txn OnCompletion
+int OptIn
+==
+txn LastValid
+int 13115618
+<=
+&&
+txn ApplicationID
+int 14973862
+==
+txn ApplicationID
+int 14973861
+==
+||
+&&
+txn TypeEnum
+int axfer
+==
+txn Sender
+txn AssetReceiver
+==
+&&
+txn LastValid
+int 13115618
+<=
+&&
+txn XferAsset
+int 14973863
+==
+txn XferAsset
+int 14973864
+==
+||
+txn XferAsset
+int 14973866
+==
+||
+&&
+||
+l7:
